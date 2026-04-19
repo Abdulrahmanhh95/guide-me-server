@@ -36,6 +36,8 @@ app.use('/api/teacher', teacherRoutes)
 app.use('/api/tests', testsRoutes)
 app.use('/api/reviews', reviewsRoutes)
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(process.env.PORT, '0.0.0.0', () => {
+  console.log(`Server running on ${process.env.PORT}`)
+})
   console.log(`GUIDE ME server running on port ${PORT}`)
 })
