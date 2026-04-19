@@ -10,11 +10,16 @@ import testsRoutes from './routes/tests.js'
 import reviewsRoutes from './routes/reviews.js'
 
 const app = express()
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 
 await initDb()
 
-app.use(cors())
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
+
 app.use(express.json())
 
 app.get('/', (req, res) => {
@@ -30,5 +35,5 @@ app.use('/api/tests', testsRoutes)
 app.use('/api/reviews', reviewsRoutes)
 
 app.listen(PORT, () => {
-  console.log(`GUIDE ME server running on http://localhost:${PORT}`)
+  console.log(`GUIDE ME server running on port ${PORT}`)
 })
