@@ -34,6 +34,6 @@ app.use('/api/teacher', teacherRoutes)
 app.use('/api/tests', testsRoutes)
 app.use('/api/reviews', reviewsRoutes)
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`GUIDE ME server running on port ${PORT}`)
 })
