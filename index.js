@@ -10,7 +10,7 @@ import testsRoutes from './routes/tests.js'
 import reviewsRoutes from './routes/reviews.js'
 
 const app = express()
-const PORT = process.env.PORT || 5000
+const PORT = Number(process.env.PORT) || 8080
 
 initDb().catch(err => {
   console.error('DB failed:', err)
@@ -25,7 +25,11 @@ app.use(cors({
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.json({ message: 'GUIDE ME API is running' })
+  res.status(200).json({ message: 'GUIDE ME API is running' })
+})
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ ok: true, port: PORT })
 })
 
 app.use('/api/auth', authRoutes)
@@ -36,8 +40,6 @@ app.use('/api/teacher', teacherRoutes)
 app.use('/api/tests', testsRoutes)
 app.use('/api/reviews', reviewsRoutes)
 
-app.listen(process.env.PORT, '0.0.0.0', () => {
-  console.log(`Server running on ${process.env.PORT}`)
-})
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`GUIDE ME server running on port ${PORT}`)
 })
