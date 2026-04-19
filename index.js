@@ -12,7 +12,9 @@ import reviewsRoutes from './routes/reviews.js'
 const app = express()
 const PORT = process.env.PORT || 5000
 
-await initDb()
+initDb().catch(err => {
+  console.error('DB failed:', err)
+})
 
 app.use(cors({
   origin: '*',
